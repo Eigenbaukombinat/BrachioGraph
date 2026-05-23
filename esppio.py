@@ -65,7 +65,7 @@ def _autodetect_port() -> Optional[str]:
     # 2. heuristic: description hints at a USB-serial bridge
     for p in candidates:
         desc = (p.description or "").lower()
-        if "usb jtag" in desc or "usb serial" in desc or "usbmodem" in desc:
+        if "usb jtag" in desc or "JTAG" in desc or "usb serial" in desc or "usbmodem" in desc:
             return p.device
 
     return None
