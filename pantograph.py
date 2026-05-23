@@ -6,7 +6,7 @@ import readchar
 from math import *
 import numpy
 import json
-import pigpio
+import esppio as pigpio
 from plotter import Plotter, Pen
 
 

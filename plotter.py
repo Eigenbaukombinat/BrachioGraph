@@ -6,7 +6,7 @@ import pprint
 import math
 import readchar
 import tqdm
-import pigpio
+import esppio as pigpio
 import numpy
 
 
@@ -773,22 +773,38 @@ clockwise and anti-clockwise. Press "0" to exit.
 
                 # add the values - if any - to the dictionaries
                 elif last_action[0]:
-                    angle = int(input("Enter the angle of the inner arm: "))
-                    pws1_dict.setdefault(angle, {})[last_action[3]] = pw_1
-
-                    print(pws1_dict)
+                    raw = input("Enter the angle of the inner arm (x to cancel): ")
+                    if raw.strip().lower() == "x":
+                        print("cancelled.")
+                    else:
+                        try:
+                            angle = int(raw)
+                        except ValueError:
+                            print("not a number, cancelled.")
+                        else:
+                            pws1_dict.setdefault(angle, {})[last_action[3]] = pw_1
+                            print(pws1_dict)
 
                 elif last_action[1]:
-                    angle = int(input("Enter the angle of the outer arm: "))
-                    pws2_dict.setdefault(angle, {})[last_action[3]] = pw_2
-
-                    print(pws2_dict)
+                    raw = input("Enter the angle of the outer arm (x to cancel): ")
+                    if raw.strip().lower() == "x":
+                        print("cancelled.")
+                    else:
+                        try:
+                            angle = int(raw)
+                        except ValueError:
+                            print("not a number, cancelled.")
+                        else:
+                            pws2_dict.setdefault(angle, {})[last_action[3]] = pw_2
+                            print(pws2_dict)
 
                 elif last_action[2]:
-                    state = input("Enter the state of the pen ([u]p, [d]own):")
-                    pen_pw_dict[state] = pen_pw
-
-                    print(pen_pw)
+                    state = input("Enter the state of the pen ([u]p, [d]own, x to cancel): ")
+                    if state.strip().lower() == "x":
+                        print("cancelled.")
+                    else:
+                        pen_pw_dict[state] = pen_pw
+                        print(pen_pw)
 
     def drive_xy(self):
         """Control the x/y position using the keyboard."""

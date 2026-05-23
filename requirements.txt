@@ -1,5 +1,5 @@
 numpy>=1.21.6
-pigpio==1.78
+pyserial>=3.5
 Pillow==10.0.1
 readchar==4.0.3
 tqdm==4.64.1
